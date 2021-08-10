@@ -15,7 +15,7 @@
 
     <link rel="stylesheet" href="/style.css" />
 
-    <title>SPOTIFY</title>
+    <title>Spotify</title>
   </head>
   <nav class="navbar navbar-dark bg-dark mb-3">
     <div class="container-fluid">
@@ -23,7 +23,7 @@
         <img
           src="/Assets/Spotify_Logo_RGB_White.png"
           alt=""
-          width="200"
+          width="100"
           height="24"
           class="img-fluid"
         />
@@ -59,8 +59,11 @@
     ></script>
 
     <script>
-      window.onload = function () {
-        fetch("https://deezerdevs-deezer.p.rapidapi.com/search?q=j%20hus", {
+      let albums = [];
+      let error = false;
+
+      function deezerRequest(query) {
+        fetch("https://deezerdevs-deezer.p.rapidapi.com/search?q=" + query, {
           method: "GET",
           headers: {
             "x-rapidapi-key":
@@ -68,26 +71,45 @@
             "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
           },
         })
-          .then((response) => {
-            console.log(response);
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("resolved");
+
+            if (data.data) {
+              const obj = { title: query, albums: data.data };
+              albums.push(obj);
+              console.log(albums);
+            } else {
+              error = true;
+            }
           })
           .catch((err) => {
+            console.log("rejected");
             console.error(err);
+            error = true;
           });
+      }
 
-          fetch("https://deezerdevs-deezer.p.rapidapi.com/album/129639972", {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-key": "1412be1b94msha16bf4a65a9ae4fp1ea2f3jsnb8d171c076d4",
-		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com"
-	}
-})
-.then(response => {
-	console.log(response);
-})
-.catch(err => {
-	console.error(err);
-});
+      fetch("https://deezerdevs-deezer.p.rapidapi.com/album/129639972", {
+        method: "GET",
+        headers: {
+          "x-rapidapi-key":
+            "1412be1b94msha16bf4a65a9ae4fp1ea2f3jsnb8d171c076d4",
+          "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+        },
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      window.onload = function () {
+        deezerRequest("J Hus");
+        deezerRequest("Dave");
+        deezerRequest("Mr Eazi");
       };
     </script>
   </body>
