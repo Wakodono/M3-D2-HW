@@ -33,28 +33,22 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Album</a>
           </li>
-          </li>
         </ul>
       </div>
     </nav>
 
     <div class="container my-5">
-      <div class="row">
-        <div class="col">
-          <div class="card">
-            <div class="card-body">This is some text within a card body.</div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <div class="card-body">This is some text within a card body.</div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <div class="card-body">This is some text within a card body.</div>
-          </div>
-        </div>
+      <div class="row justify-content-center">
+            <div class="col-6">
+              <button type="button" class="btn btn-dark btn-lg btn-block" onclick="singleAlbum()">List Albums</button>
+            </div>
+            <div class="col-6">
+              <button type="button" class="btn btn-dark btn-lg btn-block">Count Unique</button>
+            </div>
+      </div>
+
+      <div class="row albumRow">
+
       </div>
     </div>
 
@@ -96,7 +90,10 @@
             });
       }
 
-      function singleAlbum() {
+      
+      const singleAlbum = () => {
+        const albumRow = document.querySelector(".albumRow")
+
         return `<div id="${album.id}" class="col">
           <div class="card">
             <div class="card-body"><img class="img-fluid" src="${album.cover}" alt="album" style="width: 100%"</div>
@@ -105,28 +102,9 @@
       }
 
 
-      /* <div class="container">
-      <div class="row">
-        <div class="col">
-          <div class="card">
-            <div class="card-body">This is some text within a card body.</div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <div class="card-body">This is some text within a card body.</div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <div class="card-body">This is some text within a card body.</div>
-          </div>
-        </div>
-      </div>
-    </div> */
 
       window.onload = function () {
-        // searchDeezer("Jay Z ")
+        searchDeezer("Jay Z ")
       };
     </script>
   </body>
