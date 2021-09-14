@@ -17,14 +17,27 @@
 
     <title>Spotify</title>
   </head>
-  
+
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#"><img src="./Assets/Spotify_Logo_RGB_White.png" alt="Spotify logo" style="height: 50px;"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand" href="#"
+        ><img
+          src="./Assets/Spotify_Logo_RGB_White.png"
+          alt="Spotify logo"
+          style="height: 50px"
+      /></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
-    
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
@@ -39,17 +52,25 @@
 
     <div class="container my-5">
       <div class="row justify-content-center">
-            <div class="col-6">
-              <button type="button" class="btn btn-dark btn-lg btn-block" onclick="singleAlbum()">List Albums</button>
-            </div>
-            <div class="col-6">
-              <button type="button" class="btn btn-dark btn-lg btn-block">Count Unique</button>
-            </div>
+        <div class="col-6">
+          <button type="button" class="btn btn-dark btn-lg btn-block">
+            List Albums
+          </button>
+        </div>
+        <div class="col-6">
+          <button type="button" class="btn btn-dark btn-lg btn-block">
+            Count Unique
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <!-- Scrollable modal -->
+          <div class="modal-dialog modal-dialog-scrollable">...</div>
+        </div>
       </div>
 
-      <div class="row albumRow">
-
-      </div>
+      <div class="row albumRow"></div>
     </div>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -74,37 +95,32 @@
         })
           .then((response) => response.json())
           .then((data) => {
-              // resolved
-              console.log("resolved");
+            console.log("resolved");
 
-              if (data.data) {
-                const obj = { title: query, albums: data.data };
-                albums.push(obj);
-                console.log(albums);
-              } else {
-                error = true;
-              }
-            })
-            .catch((err) => {
-              console.error(err);
-            });
+            if (data.data) {
+              const obj = { title: query, albums: data.data };
+              albums.push(obj);
+              console.log(albums);
+            } else {
+              error = true;
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
       }
 
-      
       const singleAlbum = () => {
-        const albumRow = document.querySelector(".albumRow")
-
         return `<div id="${album.id}" class="col">
-          <div class="card">
-            <div class="card-body"><img class="img-fluid" src="${album.cover}" alt="album" style="width: 100%"</div>
-          </div>
-        </div>`;
-      }
-
-
+              <div class="card">
+                <div class="card-body"><img class="img-fluid" src="${album.cover}" alt="album" style="width: 100%"</div>
+              </div>
+            </div>`;
+      };
 
       window.onload = function () {
-        searchDeezer("Jay Z ")
+        searchDeezer("Jay Z ");
+        singleAlbum();
       };
     </script>
   </body>
