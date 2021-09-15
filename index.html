@@ -110,7 +110,7 @@
           });
       }
 
-      const singleAlbum = () => {
+      const singleAlbum = (album) => {
         return `<div id="${album.id}" class="col">
               <div class="card">
                 <div class="card-body"><img class="img-fluid" src="${album.cover}" alt="album" style="width: 100%"</div>
@@ -120,7 +120,6 @@
 
       window.onload = function () {
         searchDeezer("Jay Z ");
-        singleAlbum();
       };
     </script>
   </body>
